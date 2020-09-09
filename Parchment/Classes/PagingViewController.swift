@@ -278,6 +278,9 @@ open class PagingViewController:
     }
   }
   
+  /// Allow/Not allow users to interact with the Tab Item.
+  public var canSelectTabItem = true
+  
   // MARK: Private Properties
   
   private let pagingController: PagingController
@@ -619,7 +622,10 @@ open class PagingViewController:
   open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let pagingItem = pagingController.visibleItems.pagingItem(for: indexPath)
     delegate?.pagingViewController(self, didSelectItem: pagingItem)
-    pagingController.select(indexPath: indexPath, animated: true)
+    
+    if canSelectTabItem {
+        pagingController.select(indexPath: indexPath, animated: true)
+    }
   }
   
   open func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
